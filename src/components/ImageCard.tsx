@@ -34,7 +34,7 @@ export const ImageCard: React.FC<ImageCardProps> = ({
       <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-slate-950 border border-slate-800 shrink-0 flex items-center justify-center">
         <img
           src={item.previewUrl}
-          alt={`Anteprima ${item.file.name}`}
+          alt={`Preview of ${item.file.name}`}
           className="w-full h-full object-cover"
         />
         <span className="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-black/70 text-[10px] font-mono text-slate-300 uppercase">
@@ -59,24 +59,24 @@ export const ImageCard: React.FC<ImageCardProps> = ({
         {/* Status Message */}
         <div className="mt-1 flex items-center justify-center sm:justify-start gap-1.5 text-xs">
           {item.status === 'idle' && (
-            <span className="text-slate-400">In attesa...</span>
+            <span className="text-slate-400">Waiting...</span>
           )}
           {item.status === 'converting' && (
             <span className="inline-flex items-center gap-1.5 text-fuchsia-400 font-medium">
               <Loader2 className="w-3.5 h-3.5 animate-spin" aria-hidden="true" />
-              Conversione in corso...
+              Converting...
             </span>
           )}
           {item.status === 'completed' && (
             <span className="inline-flex items-center gap-1.5 text-emerald-400 font-medium">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" aria-hidden="true" />
-              Pronto per il download
+              Ready to download
             </span>
           )}
           {item.status === 'error' && (
             <span className="inline-flex items-center gap-1.5 text-rose-400 font-medium">
               <AlertCircle className="w-3.5 h-3.5 text-rose-400" aria-hidden="true" />
-              {item.errorMessage || 'Errore nella conversione'}
+              {item.errorMessage || 'Conversion failed'}
             </span>
           )}
         </div>
@@ -89,10 +89,10 @@ export const ImageCard: React.FC<ImageCardProps> = ({
             type="button"
             onClick={() => onDownload(item)}
             className="min-h-[44px] min-w-[44px] px-4 py-2 rounded-xl bg-gradient-to-r from-fuchsia-600 to-rose-600 hover:from-fuchsia-500 hover:to-rose-500 text-white text-xs font-bold inline-flex items-center justify-center gap-1.5 shadow-md shadow-fuchsia-950/50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 active:scale-95"
-            aria-label={`Scarica ${item.file.name} come ${extension.toUpperCase()}`}
+            aria-label={`Download ${item.file.name} as ${extension.toUpperCase()}`}
           >
             <Download className="w-4 h-4" aria-hidden="true" />
-            <span>Scarica</span>
+            <span>Download</span>
           </button>
         )}
 
@@ -101,10 +101,10 @@ export const ImageCard: React.FC<ImageCardProps> = ({
             type="button"
             onClick={() => onRetry(item.id)}
             className="min-h-[44px] min-w-[44px] px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-rose-300 text-xs font-semibold inline-flex items-center justify-center gap-1.5 border border-rose-900/50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
-            aria-label={`Riprova conversione per ${item.file.name}`}
+            aria-label={`Retry conversion for ${item.file.name}`}
           >
             <RefreshCw className="w-4 h-4" aria-hidden="true" />
-            <span>Riprova</span>
+            <span>Retry</span>
           </button>
         )}
 
@@ -112,7 +112,7 @@ export const ImageCard: React.FC<ImageCardProps> = ({
           type="button"
           onClick={() => onRemove(item.id)}
           className="min-h-[44px] min-w-[44px] p-2.5 rounded-xl bg-slate-800/80 hover:bg-rose-950/60 text-slate-400 hover:text-rose-300 border border-slate-700/60 hover:border-rose-800/50 transition-colors inline-flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
-          aria-label={`Rimuovi ${item.file.name} dalla lista`}
+          aria-label={`Remove ${item.file.name} from queue`}
         >
           <Trash2 className="w-4 h-4" aria-hidden="true" />
         </button>

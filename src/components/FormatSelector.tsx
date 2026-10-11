@@ -27,17 +27,17 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <span className="block text-sm font-semibold text-white">
-            Formato di Destinazione
+            Target Format
           </span>
           <span className="text-xs text-slate-400">
-            Scegli come esportare le immagini convertite
+            Choose output format for converted images
           </span>
         </div>
 
         <div
           className="inline-flex rounded-xl bg-slate-950 p-1 border border-slate-800"
           role="group"
-          aria-label="Selettore formato"
+          aria-label="Format selector"
         >
           <button
             type="button"
@@ -77,7 +77,7 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
               className="text-xs font-medium text-slate-300 flex items-center gap-1.5 cursor-pointer"
             >
               <Sliders className="w-3.5 h-3.5 text-fuchsia-400" aria-hidden="true" />
-              Qualità compressione JPG
+              JPG Quality
             </label>
             <span className="text-xs font-bold text-fuchsia-400 font-mono">
               {Math.round(quality * 100)}%
@@ -85,7 +85,7 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-[11px] text-slate-500 font-medium">Compatto (60%)</span>
+            <span className="text-[11px] text-slate-500 font-medium">Compact (60%)</span>
             <input
               id="quality-slider"
               type="range"
@@ -97,7 +97,7 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
               onChange={(e) => onQualityChange(parseFloat(e.target.value))}
               className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-fuchsia-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 min-h-[44px]"
             />
-            <span className="text-[11px] text-slate-500 font-medium">Massima (100%)</span>
+            <span className="text-[11px] text-slate-500 font-medium">Maximum (100%)</span>
           </div>
         </div>
       )}
@@ -113,10 +113,10 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
           />
           <div className="flex flex-col">
             <span className="text-xs font-semibold text-slate-200">
-              Rimuovi metadati EXIF (Privacy Mode)
+              Strip EXIF Metadata (Privacy Mode)
             </span>
             <span className="text-[11px] text-slate-400 leading-tight">
-              Azzera geolocalizzazione GPS, data e informazioni fotocamera.
+              Removes GPS location, capture date, and camera device details.
             </span>
           </div>
         </div>
@@ -125,7 +125,7 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
           type="button"
           role="switch"
           aria-checked={stripExif}
-          aria-label="Attiva o disattiva rimozione metadati EXIF"
+          aria-label="Toggle EXIF metadata stripping"
           disabled={disabled}
           onClick={() => onStripExifChange(!stripExif)}
           className="min-h-[44px] min-w-[48px] inline-flex items-center justify-center cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 rounded-full disabled:opacity-50 disabled:cursor-not-allowed"

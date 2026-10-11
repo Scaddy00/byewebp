@@ -33,9 +33,9 @@ export const ImageQueue: React.FC<ImageQueueProps> = ({
       {/* Queue Toolbar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-2">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-bold text-white">File in coda</span>
+          <span className="text-sm font-bold text-white">Queue</span>
           <span className="px-2 py-0.5 rounded-full bg-slate-800 text-fuchsia-400 text-xs font-mono font-semibold">
-            {completedCount}/{items.length} pronti
+            {completedCount}/{items.length} ready
           </span>
         </div>
 
@@ -51,12 +51,12 @@ export const ImageQueue: React.FC<ImageQueueProps> = ({
               {isZipping ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
-                  <span>Creazione ZIP...</span>
+                  <span>Creating ZIP...</span>
                 </>
               ) : (
                 <>
                   <Archive className="w-4 h-4" aria-hidden="true" />
-                  <span>Scarica ZIP ({completedCount})</span>
+                  <span>Download ZIP ({completedCount})</span>
                 </>
               )}
             </button>
@@ -69,7 +69,7 @@ export const ImageQueue: React.FC<ImageQueueProps> = ({
               className="min-h-[44px] px-4 py-2 rounded-xl bg-gradient-to-r from-fuchsia-600 to-rose-600 hover:from-fuchsia-500 hover:to-rose-500 text-white text-xs font-bold inline-flex items-center gap-2 shadow-md shadow-fuchsia-950/40 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 active:scale-95"
             >
               <DownloadCloud className="w-4 h-4" aria-hidden="true" />
-              <span>Scarica (1)</span>
+              <span>Download (1)</span>
             </button>
           )}
 
@@ -80,7 +80,7 @@ export const ImageQueue: React.FC<ImageQueueProps> = ({
             className="min-h-[44px] px-3 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 text-xs font-medium inline-flex items-center gap-1.5 border border-slate-700/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Trash2 className="w-4 h-4 text-slate-400" aria-hidden="true" />
-            <span>Pulisci</span>
+            <span>Clear All</span>
           </button>
         </div>
       </div>

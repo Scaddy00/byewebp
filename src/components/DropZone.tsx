@@ -57,7 +57,7 @@ export const DropZone: React.FC<DropZoneProps> = ({ onFilesSelected, disabled = 
     <div
       role="button"
       tabIndex={disabled ? -1 : 0}
-      aria-label="Trascina qui i tuoi file WebP o clicca per sfogliare"
+      aria-label="Drag and drop your WebP files here or click to browse"
       aria-disabled={disabled}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
@@ -100,15 +100,15 @@ export const DropZone: React.FC<DropZoneProps> = ({ onFilesSelected, disabled = 
 
       <div className="flex flex-col gap-1.5">
         <p className="text-base sm:text-lg font-bold text-white">
-          Trascina qui i file <span className="text-fuchsia-400">.webp</span> o clicca per selezionare
+          Drag & drop <span className="text-fuchsia-400">.webp</span> files here or click to browse
         </p>
         <p className="text-xs sm:text-sm text-slate-400">
-          Supporta caricamento singolo o batch • Nessun limite di dimensione
+          Supports single or batch upload • No file size limits
         </p>
       </div>
 
       <div className="mt-2 inline-flex items-center justify-center min-h-[44px] px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-semibold border border-slate-700 transition-colors">
-        Sfoglia dal dispositivo
+        Browse Files
       </div>
     </div>
   );
