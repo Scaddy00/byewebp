@@ -32,7 +32,7 @@ export async function downloadZipArchive(
     if (!item.convertedBlob) return;
 
     const baseName = item.file.name.replace(/\.[^/.]+$/, '');
-    const extension = item.targetFormat === 'png' ? 'png' : 'jpg';
+    const extension = item.targetFormat === 'jpeg' ? 'jpg' : item.targetFormat;
     let targetFileName = `${baseName}.${extension}`;
 
     // Deduplicate file names if user uploaded identically named files

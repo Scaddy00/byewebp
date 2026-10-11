@@ -34,7 +34,7 @@ export function App() {
     const link = document.createElement('a');
     link.href = item.convertedUrl;
     const baseName = item.file.name.replace(/\.[^/.]+$/, '');
-    const extension = item.targetFormat === 'png' ? 'png' : 'jpg';
+    const extension = item.targetFormat === 'jpeg' ? 'jpg' : item.targetFormat;
     link.download = `${baseName}.${extension}`;
     document.body.appendChild(link);
     link.click();

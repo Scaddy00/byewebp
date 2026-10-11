@@ -1,8 +1,8 @@
-export type TargetFormat = 'png' | 'jpeg';
+export type TargetFormat = 'png' | 'jpeg' | 'webp' | 'avif';
 
 export interface ConversionOptions {
   format: TargetFormat;
-  quality: number; // 0.1 to 1.0 (used for jpeg)
+  quality: number; // 0.1 to 1.0 (used for lossy formats: jpeg, webp, avif)
   stripExif: boolean;
 }
 

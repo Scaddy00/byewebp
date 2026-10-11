@@ -28,10 +28,23 @@ self.onmessage = async (event: MessageEvent<WorkerInputMessage>) => {
     ctx.drawImage(bitmap, 0, 0);
     bitmap.close();
 
-    const mimeType = format === 'png' ? 'image/png' : 'image/jpeg';
+    let mimeType = 'image/png';
+    let outputQuality: number | undefined = undefined;
+
+    if (format === 'jpeg') {
+      mimeType = 'image/jpeg';
+      outputQuality = Math.max(0.1, Math.min(1.0, quality));
+    } else if (format === 'webp') {
+      mimeType = 'image/webp';
+      outputQuality = Math.max(0.1, Math.min(1.0, quality));
+    } else if (format === 'avif') {
+      mimeType = 'image/avif';
+      outputQuality = Math.max(0.1, Math.min(1.0, quality));
+    }
+
     const outputBlob = await canvas.convertToBlob({
       type: mimeType,
-      quality: format === 'jpeg' ? Math.max(0.1, Math.min(1.0, quality)) : undefined,
+      quality: outputQuality,
     });
 
     const response: WorkerOutputMessage = {
