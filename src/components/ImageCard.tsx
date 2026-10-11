@@ -24,75 +24,76 @@ export const ImageCard: React.FC<ImageCardProps> = ({
   onRemove,
   onRetry,
 }) => {
-  const extension = item.targetFormat === 'png' ? 'png' : 'jpg';
+  const extension = item.targetFormat === 'jpeg' ? 'jpg' : item.targetFormat;
+  const originalExt = item.file.name.split('.').pop()?.toLowerCase() || 'img';
   const originalSizeStr = formatBytes(item.file.size);
   const convertedSizeStr = item.convertedSize ? formatBytes(item.convertedSize) : null;
 
   return (
-    <div className="w-full bg-slate-900/90 border border-slate-800 rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-4 shadow-lg transition-all hover:border-slate-700">
+    <div className="w-full bg-slate-900/90 border border-slate-800 rounded-2xl p-3 sm:p-4 flex items-center justify-between gap-3 shadow-lg transition-all hover:border-slate-700">
       {/* Thumbnail */}
-      <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-slate-950 border border-slate-800 shrink-0 flex items-center justify-center">
+      <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-950 border border-slate-800 shrink-0 flex items-center justify-center">
         <img
           src={item.previewUrl}
           alt={`Preview of ${item.file.name}`}
           className="w-full h-full object-cover"
         />
-        <span className="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-black/70 text-[10px] font-mono text-slate-300 uppercase">
-          webp
+        <span className="absolute bottom-1 right-1 px-1 py-0.2 rounded bg-black/75 text-[9px] font-mono text-slate-300 uppercase leading-none">
+          {originalExt}
         </span>
       </div>
 
-      {/* Info */}
-      <div className="flex-1 min-w-0 w-full flex flex-col gap-1 text-center sm:text-left">
-        <h3 className="text-sm font-semibold text-white truncate" title={item.file.name}>
+      {/* Info Central Column */}
+      <div className="flex-1 min-w-0 flex flex-col gap-0.5 text-left">
+        <h3 className="text-xs sm:text-sm font-semibold text-white truncate" title={item.file.name}>
           {item.file.name}
         </h3>
-        <div className="flex items-center justify-center sm:justify-start gap-2 text-xs text-slate-400">
+        <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-slate-400">
           <span>{originalSizeStr}</span>
           <span>→</span>
-          <span className="uppercase font-semibold text-fuchsia-400">{extension}</span>
+          <span className="uppercase font-bold text-fuchsia-400">{extension}</span>
           {convertedSizeStr && (
             <span className="text-slate-300 font-medium">({convertedSizeStr})</span>
           )}
         </div>
 
         {/* Status Message */}
-        <div className="mt-1 flex items-center justify-center sm:justify-start gap-1.5 text-xs">
+        <div className="flex items-center gap-1.5 text-[11px] sm:text-xs">
           {item.status === 'idle' && (
             <span className="text-slate-400">Waiting...</span>
           )}
           {item.status === 'converting' && (
-            <span className="inline-flex items-center gap-1.5 text-fuchsia-400 font-medium">
-              <Loader2 className="w-3.5 h-3.5 animate-spin" aria-hidden="true" />
+            <span className="inline-flex items-center gap-1 text-fuchsia-400 font-medium">
+              <Loader2 className="w-3 h-3 animate-spin" aria-hidden="true" />
               Converting...
             </span>
           )}
           {item.status === 'completed' && (
-            <span className="inline-flex items-center gap-1.5 text-emerald-400 font-medium">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" aria-hidden="true" />
-              Ready to download
+            <span className="inline-flex items-center gap-1 text-emerald-400 font-medium">
+              <CheckCircle2 className="w-3 h-3 text-emerald-400" aria-hidden="true" />
+              Ready
             </span>
           )}
           {item.status === 'error' && (
-            <span className="inline-flex items-center gap-1.5 text-rose-400 font-medium">
-              <AlertCircle className="w-3.5 h-3.5 text-rose-400" aria-hidden="true" />
-              {item.errorMessage || 'Conversion failed'}
+            <span className="inline-flex items-center gap-1 text-rose-400 font-medium truncate">
+              <AlertCircle className="w-3 h-3 text-rose-400 shrink-0" aria-hidden="true" />
+              {item.errorMessage || 'Failed'}
             </span>
           )}
         </div>
       </div>
 
       {/* Actions */}
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
         {item.status === 'completed' && (
           <button
             type="button"
             onClick={() => onDownload(item)}
-            className="min-h-[44px] min-w-[44px] px-4 py-2 rounded-xl bg-gradient-to-r from-fuchsia-600 to-rose-600 hover:from-fuchsia-500 hover:to-rose-500 text-white text-xs font-bold inline-flex items-center justify-center gap-1.5 shadow-md shadow-fuchsia-950/50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 active:scale-95"
+            className="min-h-[44px] min-w-[44px] px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-fuchsia-600 to-rose-600 hover:from-fuchsia-500 hover:to-rose-500 text-white text-xs font-bold inline-flex items-center justify-center gap-1.5 shadow-md shadow-fuchsia-950/50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 active:scale-95"
             aria-label={`Download ${item.file.name} as ${extension.toUpperCase()}`}
           >
             <Download className="w-4 h-4" aria-hidden="true" />
-            <span>Download</span>
+            <span className="hidden sm:inline">Download</span>
           </button>
         )}
 
@@ -100,18 +101,18 @@ export const ImageCard: React.FC<ImageCardProps> = ({
           <button
             type="button"
             onClick={() => onRetry(item.id)}
-            className="min-h-[44px] min-w-[44px] px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-rose-300 text-xs font-semibold inline-flex items-center justify-center gap-1.5 border border-rose-900/50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
+            className="min-h-[44px] min-w-[44px] px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-rose-300 text-xs font-semibold inline-flex items-center justify-center gap-1.5 border border-rose-900/50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 active:scale-95"
             aria-label={`Retry conversion for ${item.file.name}`}
           >
             <RefreshCw className="w-4 h-4" aria-hidden="true" />
-            <span>Retry</span>
+            <span className="hidden sm:inline">Retry</span>
           </button>
         )}
 
         <button
           type="button"
           onClick={() => onRemove(item.id)}
-          className="min-h-[44px] min-w-[44px] p-2.5 rounded-xl bg-slate-800/80 hover:bg-rose-950/60 text-slate-400 hover:text-rose-300 border border-slate-700/60 hover:border-rose-800/50 transition-colors inline-flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
+          className="min-h-[44px] min-w-[44px] p-2.5 rounded-xl bg-slate-800/80 hover:bg-rose-950/60 text-slate-400 hover:text-rose-300 border border-slate-700/60 hover:border-rose-800/50 transition-colors inline-flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 active:scale-95"
           aria-label={`Remove ${item.file.name} from queue`}
         >
           <Trash2 className="w-4 h-4" aria-hidden="true" />

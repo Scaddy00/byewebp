@@ -5,9 +5,10 @@ export const Header: React.FC = () => {
   return (
     <header className="w-full text-center py-8 px-4 flex flex-col items-center gap-4">
       {/* Centered Privacy Badge */}
-      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-medium">
+      <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-medium max-w-full text-center">
         <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" aria-hidden="true" />
-        <span>100% Client-Side • Zero Upload • Guaranteed Privacy</span>
+        <span className="sm:inline hidden">100% Client-Side • Zero Upload • Guaranteed Privacy</span>
+        <span className="sm:hidden inline">100% Client-Side • Private In-Browser</span>
       </div>
 
       <div className="flex items-center gap-3">

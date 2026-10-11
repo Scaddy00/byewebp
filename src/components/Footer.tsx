@@ -48,12 +48,12 @@ export const Footer: React.FC = () => {
 
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-xs pt-2">
         <span>{SITE_CONFIG.name} • 100% In-Browser Privacy Utility</span>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center justify-center sm:justify-end gap-2 w-full sm:w-auto">
           <a
             href={SITE_CONFIG.donationUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="min-h-[44px] inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-950/30 border border-amber-500/20 text-amber-300 hover:text-amber-200 hover:bg-amber-900/40 hover:border-amber-500/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 font-medium"
+            className="min-h-[44px] inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-950/30 border border-amber-500/20 text-amber-300 hover:text-amber-200 hover:bg-amber-900/40 hover:border-amber-500/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 font-medium active:scale-95"
             aria-label="Support the developer on Ko-fi"
           >
             <Coffee className="w-3.5 h-3.5 text-amber-400" aria-hidden="true" />
@@ -64,7 +64,7 @@ export const Footer: React.FC = () => {
             href={SITE_CONFIG.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="min-h-[44px] inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-slate-400 hover:text-fuchsia-300 hover:bg-slate-900/60 border border-transparent hover:border-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400"
+            className="min-h-[44px] inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-slate-400 hover:text-fuchsia-300 hover:bg-slate-900/60 border border-transparent hover:border-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 active:scale-95"
             aria-label="View repository and star on GitHub"
           >
             <GithubIcon className="w-3.5 h-3.5" />

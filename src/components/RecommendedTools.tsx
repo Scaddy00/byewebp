@@ -9,14 +9,14 @@ export const RecommendedTools: React.FC = () => {
       aria-labelledby="recommended-tools-heading"
     >
       {/* Section Header */}
-      <div className="flex items-center justify-between px-2">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-2 px-2">
         <div className="flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-fuchsia-400" aria-hidden="true" />
+          <Sparkles className="w-4 h-4 text-fuchsia-400 shrink-0" aria-hidden="true" />
           <h2 id="recommended-tools-heading" className="text-sm font-bold text-white tracking-tight">
             Recommended Tools for Creators & Webmasters
           </h2>
         </div>
-        <span className="text-[11px] font-medium text-slate-500 uppercase tracking-wider">
+        <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider self-start sm:self-auto">
           Curated Picks
         </span>
       </div>
@@ -83,8 +83,8 @@ export const RecommendedTools: React.FC = () => {
       </div>
 
       {/* FTC / Advertising Transparency Disclosure */}
-      <p className="text-[11px] text-slate-500 text-center px-4 leading-normal">
-        <span className="font-semibold text-slate-400">Affiliate Disclosure:</span> Some links above are affiliate partnerships. If you choose to subscribe through them, we may earn a modest commission at zero additional cost to you, helping keep ZapWebp 100% free.
+      <p className="text-[11px] sm:text-xs text-slate-400 text-center px-4 leading-relaxed">
+        <span className="font-semibold text-slate-300">Affiliate Disclosure:</span> Some links above are affiliate partnerships. If you choose to subscribe through them, we may earn a modest commission at zero additional cost to you, helping keep ZapWebp 100% free.
       </p>
     </section>
   );

@@ -110,8 +110,8 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
             </span>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="text-[11px] text-slate-500 font-medium">Compact (60%)</span>
+          {/* Full-width touch track with labels below for thumb ergonomics */}
+          <div className="flex flex-col gap-1 w-full">
             <input
               id="quality-slider"
               type="range"
@@ -123,13 +123,20 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
               onChange={(e) => onQualityChange(parseFloat(e.target.value))}
               className="w-full h-2 bg-slate-950 rounded-lg appearance-none cursor-pointer accent-fuchsia-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 min-h-[44px]"
             />
-            <span className="text-[11px] text-slate-500 font-medium">Maximum (100%)</span>
+            <div className="flex items-center justify-between text-[11px] text-slate-400 font-medium px-0.5">
+              <span>Compact (60%)</span>
+              <span>Balanced (80%)</span>
+              <span>Max (100%)</span>
+            </div>
           </div>
         </div>
       )}
 
       {/* EXIF Privacy Stripping Toggle */}
-      <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-4">
+      <div 
+        onClick={() => !disabled && onStripExifChange(!stripExif)}
+        className="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-4 cursor-pointer select-none group"
+      >
         <div className="flex items-start gap-2.5">
           <ShieldCheck
             className={`w-4 h-4 shrink-0 mt-0.5 transition-colors ${
@@ -138,7 +145,7 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
             aria-hidden="true"
           />
           <div className="flex flex-col">
-            <span className="text-xs font-semibold text-slate-200">
+            <span className="text-xs font-semibold text-slate-200 group-hover:text-white transition-colors">
               Strip EXIF Metadata (Privacy Mode)
             </span>
             <span className="text-[11px] text-slate-400 leading-tight">
