@@ -93,6 +93,7 @@ export function useWebpConverter() {
       const message: WorkerInputMessage = {
         id: item.id,
         fileBlob: item.file,
+        fileName: item.file.name,
         format: item.targetFormat,
         quality,
         stripExif,

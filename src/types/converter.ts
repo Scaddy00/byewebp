@@ -24,6 +24,7 @@ export interface ImageItem {
 export interface WorkerInputMessage {
   id: string;
   fileBlob: Blob;
+  fileName?: string;
   format: TargetFormat;
   quality: number;
   stripExif?: boolean;

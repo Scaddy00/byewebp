@@ -1,10 +1,34 @@
 import type { WorkerInputMessage, WorkerOutputMessage } from '../types/converter';
+import { heicTo } from 'heic-to/next';
 
 self.onmessage = async (event: MessageEvent<WorkerInputMessage>) => {
-  const { id, fileBlob, format, quality } = event.data;
+  const { id, fileBlob, fileName, format, quality } = event.data;
 
   try {
-    const bitmap = await createImageBitmap(fileBlob);
+    let bitmap: ImageBitmap;
+
+    const isHeic =
+      (fileName && (fileName.toLowerCase().endsWith('.heic') || fileName.toLowerCase().endsWith('.heif'))) ||
+      fileBlob.type === 'image/heic' ||
+      fileBlob.type === 'image/heif';
+
+    if (isHeic) {
+      bitmap = await heicTo({
+        blob: fileBlob,
+        type: 'bitmap',
+      });
+    } else {
+      try {
+        bitmap = await createImageBitmap(fileBlob);
+      } catch {
+        // Fallback: try heicTo in case HEIC format without proper extension/MIME
+        bitmap = await heicTo({
+          blob: fileBlob,
+          type: 'bitmap',
+        });
+      }
+    }
+
     const { width, height } = bitmap;
 
     if (typeof OffscreenCanvas === 'undefined') {
