@@ -12,49 +12,84 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 
 async function handleConversion(srcUrl, format) {
-  // 1. Fetch image binary
-  const response = await fetch(srcUrl);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch image: HTTP ${response.status}`);
-  }
-
-  const blob = await response.blob();
-  const bitmap = await createImageBitmap(blob);
-  const { width, height } = bitmap;
-
-  // 2. Setup canvas
   const canvas = document.getElementById('conversion-canvas');
-  canvas.width = width;
-  canvas.height = height;
-
   const ctx = canvas.getContext('2d');
   if (!ctx) {
-    bitmap.close();
     throw new Error('Could not get 2D canvas context');
   }
 
-  // Clear previous canvas data
+  let width = 0;
+  let height = 0;
+  let drawSource = null;
+  let isBitmap = false;
+
+  // Strategy 1: Try fetch + createImageBitmap (fastest & handles headers with host_permissions)
+  try {
+    const response = await fetch(srcUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+    const blob = await response.blob();
+    const bitmap = await createImageBitmap(blob);
+    width = bitmap.width;
+    height = bitmap.height;
+    drawSource = bitmap;
+    isBitmap = true;
+  } catch (fetchErr) {
+    console.warn('[ZapWebp Offscreen] Fetch failed, falling back to HTMLImageElement:', fetchErr);
+    // Strategy 2: Fallback to HTMLImageElement
+    const img = await loadImageElement(srcUrl);
+    width = img.naturalWidth || img.width;
+    height = img.naturalHeight || img.height;
+    drawSource = img;
+  }
+
+  if (!width || !height || !drawSource) {
+    throw new Error('Failed to decode image dimensions');
+  }
+
+  canvas.width = width;
+  canvas.height = height;
+
+  // Clear previous canvas
   ctx.clearRect(0, 0, width, height);
 
-  // If converting to JPEG, fill transparent areas with clean white
+  // If converting to JPEG, fill transparent background with clean white
   if (format === 'jpeg') {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, width, height);
   }
 
-  // Draw bitmap
-  ctx.drawImage(bitmap, 0, 0);
-  bitmap.close();
+  // Draw source image
+  ctx.drawImage(drawSource, 0, 0);
 
-  // 3. Export Data URL
+  if (isBitmap && drawSource.close) {
+    drawSource.close();
+  }
+
+  // Export Data URL
   const mimeType = format === 'png' ? 'image/png' : 'image/jpeg';
   const quality = format === 'jpeg' ? 0.92 : undefined;
   const dataUrl = canvas.toDataURL(mimeType, quality);
 
-  // 4. Derive filename
   const filename = generateConvertedFilename(srcUrl, format);
-
   return { dataUrl, filename };
+}
+
+function loadImageElement(srcUrl) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => resolve(img);
+    img.onerror = () => {
+      // Retry once without crossOrigin in case host rejects CORS header
+      const fallbackImg = new Image();
+      fallbackImg.onload = () => resolve(fallbackImg);
+      fallbackImg.onerror = (e) => reject(new Error('Image failed to load via DOM element: ' + (e.message || 'Network error')));
+      fallbackImg.src = srcUrl;
+    };
+    img.src = srcUrl;
+  });
 }
 
 function generateConvertedFilename(srcUrl, format) {

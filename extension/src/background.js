@@ -50,12 +50,27 @@ chrome.contextMenus.onClicked.addListener(async (info, _tab) => {
         saveAs: false,
       });
     } else {
-      console.error('[ZapWebp] Conversion failed:', response ? response.error : 'No response');
+      const errorMsg = response && response.error ? response.error : 'Could not convert image';
+      console.error('[ZapWebp] Conversion failed:', errorMsg);
+      showNotification('Conversion Failed', `Could not convert image: ${errorMsg}`);
     }
   } catch (err) {
+    const errorMsg = err instanceof Error ? err.message : 'Unknown error';
     console.error('[ZapWebp] Error processing context menu image:', err);
+    showNotification('Conversion Error', errorMsg);
   }
 });
+
+function showNotification(title, message) {
+  if (typeof chrome.notifications !== 'undefined') {
+    chrome.notifications.create({
+      type: 'basic',
+      iconUrl: 'icons/icon-48.png',
+      title: `ZapWebp: ${title}`,
+      message: message,
+    });
+  }
+}
 
 // 3. Ensure Offscreen Document Exists
 let creatingOffscreenPromise = null;

@@ -6,7 +6,11 @@
   "permissions": [
     "contextMenus",
     "downloads",
-    "offscreen"
+    "offscreen",
+    "notifications"
+  ],
+  "host_permissions": [
+    "<all_urls>"
   ],
   "background": {
     "service_worker": "src/background.js"
