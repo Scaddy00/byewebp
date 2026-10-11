@@ -26,6 +26,7 @@ export function App() {
   } = useWebpConverter();
 
   const [isZipping, setIsZipping] = useState(false);
+  const [showDonationCallout, setShowDonationCallout] = useState(false);
 
   const handleDownloadItem = useCallback((item: ImageItem) => {
     if (!item.convertedUrl) return;
@@ -56,6 +57,7 @@ export function App() {
     setIsZipping(true);
     try {
       await downloadZipArchive(items);
+      setShowDonationCallout(true);
     } catch (error) {
       console.error('Failed to generate ZIP archive:', error);
     } finally {
@@ -83,6 +85,8 @@ export function App() {
         <ImageQueue
           items={items}
           isZipping={isZipping}
+          showDonationCallout={showDonationCallout}
+          onDismissDonationCallout={() => setShowDonationCallout(false)}
           onDownload={handleDownloadItem}
           onDownloadAll={handleDownloadAll}
           onDownloadZip={handleDownloadZip}

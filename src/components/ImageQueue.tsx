@@ -1,11 +1,14 @@
 import React from 'react';
 import type { ImageItem } from '../types/converter';
 import { ImageCard } from './ImageCard';
-import { Archive, DownloadCloud, Trash2, Loader2 } from 'lucide-react';
+import { Archive, DownloadCloud, Trash2, Loader2, Coffee, X } from 'lucide-react';
+import { SITE_CONFIG } from '../config/site';
 
 interface ImageQueueProps {
   items: ImageItem[];
   isZipping?: boolean;
+  showDonationCallout?: boolean;
+  onDismissDonationCallout?: () => void;
   onDownload: (item: ImageItem) => void;
   onDownloadAll: () => void;
   onDownloadZip: () => void;
@@ -17,6 +20,8 @@ interface ImageQueueProps {
 export const ImageQueue: React.FC<ImageQueueProps> = ({
   items,
   isZipping = false,
+  showDonationCallout = false,
+  onDismissDonationCallout,
   onDownload,
   onDownloadAll,
   onDownloadZip,
@@ -84,6 +89,38 @@ export const ImageQueue: React.FC<ImageQueueProps> = ({
           </button>
         </div>
       </div>
+
+      {/* Optional Post-Batch Tip Callout */}
+      {showDonationCallout && (
+        <div className="w-full px-4 py-3 rounded-2xl bg-amber-950/40 border border-amber-500/30 flex items-center justify-between gap-3 text-xs text-amber-200 shadow-md">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <Coffee className="w-4 h-4 text-amber-400 shrink-0" aria-hidden="true" />
+            <span className="truncate font-medium">
+              Saved you time? Support ZapWebp with a coffee!
+            </span>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <a
+              href={SITE_CONFIG.donationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="min-h-[44px] px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs inline-flex items-center gap-1.5 shadow-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            >
+              Tip ☕
+            </a>
+            {onDismissDonationCallout && (
+              <button
+                type="button"
+                onClick={onDismissDonationCallout}
+                className="min-h-[44px] min-w-[44px] p-2.5 rounded-xl text-amber-300/80 hover:text-amber-100 hover:bg-amber-900/40 transition-colors inline-flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 cursor-pointer"
+                aria-label="Dismiss tip suggestion"
+              >
+                <X className="w-4 h-4" aria-hidden="true" />
+              </button>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Cards List */}
       <div className="flex flex-col gap-3">
