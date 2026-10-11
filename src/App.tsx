@@ -12,8 +12,10 @@ export function App() {
     items,
     format,
     quality,
+    stripExif,
     setFormat,
     setQuality,
+    setStripExif,
     addFiles,
     removeFile,
     clearAll,
@@ -54,8 +56,10 @@ export function App() {
         <FormatSelector
           format={format}
           quality={quality}
+          stripExif={stripExif}
           onFormatChange={setFormat}
           onQualityChange={setQuality}
+          onStripExifChange={setStripExif}
           disabled={isProcessing}
         />
 

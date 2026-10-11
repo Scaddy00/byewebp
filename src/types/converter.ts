@@ -3,6 +3,7 @@ export type TargetFormat = 'png' | 'jpeg';
 export interface ConversionOptions {
   format: TargetFormat;
   quality: number; // 0.1 to 1.0 (used for jpeg)
+  stripExif: boolean;
 }
 
 export type ItemStatus = 'idle' | 'converting' | 'completed' | 'error';
@@ -13,6 +14,7 @@ export interface ImageItem {
   previewUrl: string;
   status: ItemStatus;
   targetFormat: TargetFormat;
+  stripExif?: boolean;
   convertedBlob?: Blob;
   convertedUrl?: string;
   convertedSize?: number;
@@ -24,6 +26,7 @@ export interface WorkerInputMessage {
   fileBlob: Blob;
   format: TargetFormat;
   quality: number;
+  stripExif?: boolean;
 }
 
 export interface WorkerSuccessMessage {

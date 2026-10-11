@@ -12,6 +12,7 @@ export function useWebpConverter() {
   const [items, setItems] = useState<ImageItem[]>([]);
   const [format, setFormat] = useState<TargetFormat>('png');
   const [quality, setQuality] = useState<number>(0.92);
+  const [stripExif, setStripExif] = useState<boolean>(true);
 
   const workerRef = useRef<Worker | null>(null);
   const activeIdsRef = useRef<Set<string>>(new Set());
@@ -94,6 +95,7 @@ export function useWebpConverter() {
         fileBlob: item.file,
         format: item.targetFormat,
         quality,
+        stripExif,
       };
 
       workerRef.current?.postMessage(message);
@@ -107,7 +109,7 @@ export function useWebpConverter() {
         return item;
       })
     );
-  }, [items, quality]);
+  }, [items, quality, stripExif]);
 
   const addFiles = useCallback(
     (files: FileList | File[]) => {
@@ -133,6 +135,7 @@ export function useWebpConverter() {
           previewUrl,
           status: 'idle',
           targetFormat: format,
+          stripExif,
         });
       });
 
@@ -140,7 +143,7 @@ export function useWebpConverter() {
         setItems((prev) => [...prev, ...newItems]);
       }
     },
-    [format]
+    [format, stripExif]
   );
 
   const removeFile = useCallback((id: string) => {
@@ -178,6 +181,7 @@ export function useWebpConverter() {
               ...item,
               status: 'idle',
               targetFormat: format,
+              stripExif,
               convertedBlob: undefined,
               convertedUrl: undefined,
               convertedSize: undefined,
@@ -188,15 +192,17 @@ export function useWebpConverter() {
         })
       );
     },
-    [format]
+    [format, stripExif]
   );
 
   return {
     items,
     format,
     quality,
+    stripExif,
     setFormat: changeFormat,
     setQuality,
+    setStripExif,
     addFiles,
     removeFile,
     clearAll,

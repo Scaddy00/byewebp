@@ -1,24 +1,29 @@
 import React from 'react';
 import type { TargetFormat } from '../types/converter';
-import { Sliders } from 'lucide-react';
+import { Sliders, ShieldCheck } from 'lucide-react';
 
 interface FormatSelectorProps {
   format: TargetFormat;
   quality: number;
+  stripExif: boolean;
   onFormatChange: (format: TargetFormat) => void;
   onQualityChange: (quality: number) => void;
+  onStripExifChange: (enabled: boolean) => void;
   disabled?: boolean;
 }
 
 export const FormatSelector: React.FC<FormatSelectorProps> = ({
   format,
   quality,
+  stripExif,
   onFormatChange,
   onQualityChange,
+  onStripExifChange,
   disabled = false,
 }) => {
   return (
     <div className="w-full max-w-xl mx-auto bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-6 flex flex-col gap-4 shadow-xl">
+      {/* Target Format Selector */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <span className="block text-sm font-semibold text-white">
@@ -29,7 +34,11 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
           </span>
         </div>
 
-        <div className="inline-flex rounded-xl bg-slate-950 p-1 border border-slate-800" role="group" aria-label="Selettore formato">
+        <div
+          className="inline-flex rounded-xl bg-slate-950 p-1 border border-slate-800"
+          role="group"
+          aria-label="Selettore formato"
+        >
           <button
             type="button"
             onClick={() => onFormatChange('png')}
@@ -59,6 +68,7 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
         </div>
       </div>
 
+      {/* JPG Quality Slider */}
       {format === 'jpeg' && (
         <div className="pt-3 border-t border-slate-800/80 flex flex-col gap-2">
           <div className="flex items-center justify-between">
@@ -91,6 +101,45 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
           </div>
         </div>
       )}
+
+      {/* EXIF Privacy Stripping Toggle */}
+      <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-4">
+        <div className="flex items-start gap-2.5">
+          <ShieldCheck
+            className={`w-4 h-4 shrink-0 mt-0.5 transition-colors ${
+              stripExif ? 'text-emerald-400' : 'text-slate-500'
+            }`}
+            aria-hidden="true"
+          />
+          <div className="flex flex-col">
+            <span className="text-xs font-semibold text-slate-200">
+              Rimuovi metadati EXIF (Privacy Mode)
+            </span>
+            <span className="text-[11px] text-slate-400 leading-tight">
+              Azzera geolocalizzazione GPS, data e informazioni fotocamera.
+            </span>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          role="switch"
+          aria-checked={stripExif}
+          aria-label="Attiva o disattiva rimozione metadati EXIF"
+          disabled={disabled}
+          onClick={() => onStripExifChange(!stripExif)}
+          className={`relative inline-flex h-7 w-12 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 disabled:opacity-50 disabled:cursor-not-allowed ${
+            stripExif ? 'bg-emerald-600' : 'bg-slate-800'
+          }`}
+        >
+          <span
+            aria-hidden="true"
+            className={`pointer-events-none inline-block h-6 w-6 transform rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out ${
+              stripExif ? 'translate-x-5' : 'translate-x-0'
+            }`}
+          />
+        </button>
+      </div>
     </div>
   );
 };
