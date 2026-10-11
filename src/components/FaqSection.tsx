@@ -8,24 +8,24 @@ interface FaqItem {
 
 const FAQ_ITEMS: FaqItem[] = [
   {
-    question: 'Is WebpSnap free and private?',
+    question: 'Is ZapWebp free and private?',
     answer:
-      'Yes, WebpSnap is 100% free with no hidden paywalls, account registrations, or watermarks. All image conversions happen entirely client-side inside your browser via HTML5 Canvas and Web Workers. Your files are never sent to any remote server.',
+      'Yes, ZapWebp is 100% free with no hidden paywalls, account registrations, or watermarks. All image conversions happen entirely client-side inside your browser via HTML5 Canvas and Web Workers. Your files are never sent to any remote server.',
   },
   {
-    question: 'How does WebpSnap convert WebP to PNG or JPG without uploading?',
+    question: 'How does ZapWebp convert WebP to PNG or JPG without uploading?',
     answer:
-      'WebpSnap leverages your browser’s native OffscreenCanvas and Web Worker APIs. The WebP image file is decoded directly into device memory as an ImageBitmap, rendered onto an isolated canvas, and re-encoded into PNG or JPG format locally without sending a single byte across the network.',
+      'ZapWebp leverages your browser’s native OffscreenCanvas and Web Worker APIs. The WebP image file is decoded directly into device memory as an ImageBitmap, rendered onto an isolated canvas, and re-encoded into PNG or JPG format locally without sending a single byte across the network.',
   },
   {
     question: 'What is EXIF metadata stripping and why does it matter?',
     answer:
-      'EXIF metadata embedded in photos often reveals private personal information, including exact GPS geographic coordinates, capture date and time, and camera or smartphone hardware serial numbers. When Privacy Mode is active, WebpSnap rasterizes the image cleanly, stripping all tracking metadata for safe social sharing and publishing.',
+      'EXIF metadata embedded in photos often reveals private personal information, including exact GPS geographic coordinates, capture date and time, and camera or smartphone hardware serial numbers. When Privacy Mode is active, ZapWebp rasterizes the image cleanly, stripping all tracking metadata for safe social sharing and publishing.',
   },
   {
     question: 'Can I convert multiple WebP images in batch?',
     answer:
-      'Yes! You can drag and drop dozens of WebP files at the same time. WebpSnap converts them concurrently with automatic queuing, and provides a one-click ZIP download button so you can download all converted PNG or JPG images at once.',
+      'Yes! You can drag and drop dozens of WebP files at the same time. ZapWebp converts them concurrently with automatic queuing, and provides a one-click ZIP download button so you can download all converted PNG or JPG images at once.',
   },
   {
     question: 'Are there any file size or conversion limits?',

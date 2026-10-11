@@ -46,9 +46,9 @@ export const Footer: React.FC = () => {
       </div>
 
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-xs pt-2">
-        <span>WebpSnap • 100% In-Browser Privacy Utility</span>
+        <span>ZapWebp • 100% In-Browser Privacy Utility</span>
         <a
-          href="https://github.com/Scaddy00/webpsnap"
+          href="https://github.com/Scaddy00/zapwebp"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 text-slate-400 hover:text-fuchsia-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 rounded-md py-1 px-2"

@@ -15,7 +15,7 @@ export const Header: React.FC = () => {
           <Zap className="w-7 h-7 text-fuchsia-300" aria-hidden="true" />
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-          Webp<span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-rose-400">Snap</span>
+          Zap<span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-rose-400">Webp</span>
         </h1>
       </div>
 

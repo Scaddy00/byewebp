@@ -15,7 +15,7 @@ function getTimestampString(): string {
 
 export async function downloadZipArchive(
   items: ImageItem[],
-  customPrefix = 'webpsnap'
+  customPrefix = 'zapwebp'
 ): Promise<void> {
   const completedItems = items.filter(
     (item) => item.status === 'completed' && item.convertedBlob

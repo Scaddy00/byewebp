@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚡ WebpSnap
+# ⚡ ZapWebp
 
 **Ultra-fast, 100% client-side WebP to PNG/JPG image converter & privacy metadata stripper.**
 
@@ -11,17 +11,17 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC.svg?logo=tailwind-css)](https://tailwindcss.com/)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25_Client--Side-emerald.svg)](https://github.com)
 
-[Live Demo (Cloudflare Pages)](https://webpsnap.pages.dev) • [Report Bug](https://github.com/scaddy/webpsnap/issues) • [Request Feature](https://github.com/scaddy/webpsnap/issues)
+[Live Demo (Cloudflare Pages)](https://zapwebp.pages.dev) • [Report Bug](https://github.com/Scaddy00/zapwebp/issues) • [Request Feature](https://github.com/Scaddy00/zapwebp/issues)
 
 </div>
 
 ---
 
-## 🌟 Why WebpSnap?
+## 🌟 Why ZapWebp?
 
 Most online image converters are bloated, slow, rate-limited, and filled with deceptive ads. Worse, they **upload your personal photos to third-party remote servers** to process them.
 
-**WebpSnap changes that:**
+**ZapWebp changes that:**
 - **Zero Upload:** Your files **never leave your browser or device**. Processing happens entirely in local RAM and CPU.
 - **Hardware Acceleration:** Native `OffscreenCanvas` rendering offloaded to dedicated Web Workers (<100ms per image).
 - **Zero Tracking & No Accounts:** No registration, no cookies, no tracking scripts, no file size limits.
@@ -34,7 +34,7 @@ Most online image converters are bloated, slow, rate-limited, and filled with de
 
 - 🔄 **Lossless PNG & Compressed JPG:** Convert `.webp` to high-fidelity PNG or customizable JPG (60% to 100% compression slider with automatic white background fill for transparency).
 - 🧵 **Multi-Threaded Web Worker Engine:** Image decoding and rasterization are executed in an isolated background thread, ensuring a buttery-smooth 60fps UI with zero frame drops.
-- 📦 **Batch Queue & ZIP Download:** Drop multiple files simultaneously; download individually or export all as a timestamped archive (`webpsnap-YYYYMMDD.zip`).
+- 📦 **Batch Queue & ZIP Download:** Drop multiple files simultaneously; download individually or export all as a timestamped archive (`zapwebp-YYYYMMDD.zip`).
 - 🛡️ **Privacy Mode (EXIF Stripping):** Toggleable EXIF metadata stripper to sanitize private photos before sharing online.
 - 🎨 **Modern Accessible UI:** Dark mode with Ryu brand aesthetics (fuchsia/rose accents), fully compliant with WCAG 2.1 AA standards (keyboard navigable, 44px touch targets, screen-reader friendly).
 - 📱 **Responsive Design:** Optimized layout for all screens, from desktop workstations down to mobile viewports (375px).
@@ -88,8 +88,8 @@ Most online image converters are bloated, slow, rate-limited, and filled with de
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/scaddy/webpsnap.git
-   cd webpsnap
+   git clone https://github.com/Scaddy00/zapwebp.git
+   cd zapwebp
    ```
 
 2. Install dependencies:
@@ -113,13 +113,13 @@ Most online image converters are bloated, slow, rate-limited, and filled with de
 
 ## 🚢 Deployment
 
-Because **WebpSnap** is 100% static and client-side, it costs **$0 to host** with unlimited bandwidth.
+Because **ZapWebp** is 100% static and client-side, it costs **$0 to host** with unlimited bandwidth.
 
 ### Recommended: Cloudflare Pages
 
 1. Fork or push this repository to GitHub.
 2. In the [Cloudflare Dashboard](https://dash.cloudflare.com/), go to **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**.
-3. Select `webpsnap`.
+3. Select `zapwebp`.
 4. Build configuration:
    - **Framework preset:** `Vite`
    - **Build command:** `npm run build`
