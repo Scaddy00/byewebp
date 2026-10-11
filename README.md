@@ -36,8 +36,10 @@ Most online image converters are bloated, slow, rate-limited, and filled with de
 - 🧵 **Multi-Threaded Web Worker Engine:** Image decoding and rasterization are executed in an isolated background thread, ensuring a buttery-smooth 60fps UI with zero frame drops.
 - 📦 **Batch Queue & ZIP Download:** Drop multiple files simultaneously; download individually or export all as a timestamped archive (`zapwebp-YYYYMMDD.zip`).
 - 🛡️ **Privacy Mode (EXIF Stripping):** Toggleable EXIF metadata stripper to sanitize private photos before sharing online.
+- 🧩 **ZapWebp Browser Extension (Chrome / Edge / Brave):** Right-click on any web image and instantly save as PNG or JPG without leaving the page.
 - 🎨 **Modern Accessible UI:** Dark mode with Ryu brand aesthetics (fuchsia/rose accents), fully compliant with WCAG 2.1 AA standards (keyboard navigable, 44px touch targets, screen-reader friendly).
 - 📱 **Responsive Design:** Optimized layout for all screens, from desktop workstations down to mobile viewports (375px).
+
 
 ---
 
@@ -108,6 +110,27 @@ Most online image converters are bloated, slow, rate-limited, and filled with de
    npm run build
    ```
    The static distribution files will be generated in `dist/`.
+
+---
+
+## 🧩 Browser Extension (Chrome / Edge / Brave)
+
+ZapWebp includes an official **Manifest V3** browser extension that adds right-click shortcuts directly to your browser:
+- `ZapWebp: Save image as PNG`
+- `ZapWebp: Save image as JPG`
+
+### How to Install (Developer / Unpacked Mode):
+1. Package or use the extension folder:
+   ```bash
+   npm run build:extension
+   ```
+   *(Or point directly to the `extension/` directory)*.
+2. Open your browser extensions page:
+   - **Chrome / Brave:** Navigate to `chrome://extensions/`
+   - **Microsoft Edge:** Navigate to `edge://extensions/`
+3. Enable **Developer mode** (toggle in the top-right corner).
+4. Click **Load unpacked** and select the `extension/` folder in this repository.
+5. That's it! Right-click any image on any website to convert and save it immediately.
 
 ---
 
