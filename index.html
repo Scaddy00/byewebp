@@ -3,8 +3,99 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Ultra-fast, 100% client-side WebP to PNG/JPG converter. Zero upload, zero tracking, total privacy." />
-    <title>WebpSnap — Instant WebP to PNG/JPG Converter</title>
+    <meta name="description" content="Ultra-fast, 100% private in-browser WebP to PNG/JPG converter. Zero server uploads, batch ZIP download, and automatic EXIF metadata stripping." />
+    <meta name="keywords" content="webp to png, webp to jpg, convert webp, batch webp converter, private image converter, exif stripper, in-browser image conversion, free webp converter" />
+    <meta name="theme-color" content="#020617" />
+    <link rel="canonical" href="https://webpsnap.pages.dev/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://webpsnap.pages.dev/" />
+    <meta property="og:title" content="WebpSnap — Instant WebP to PNG/JPG Converter (100% Client-Side)" />
+    <meta property="og:description" content="Ultra-fast, 100% private in-browser WebP to PNG/JPG converter. Zero server uploads, batch ZIP download, and automatic EXIF metadata stripping." />
+    <meta property="og:site_name" content="WebpSnap" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="WebpSnap — Instant WebP to PNG/JPG Converter" />
+    <meta name="twitter:description" content="Ultra-fast, 100% private in-browser WebP to PNG/JPG converter. Zero server uploads, batch ZIP download, and automatic EXIF metadata stripping." />
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "WebpSnap",
+          "url": "https://webpsnap.pages.dev/",
+          "description": "Ultra-fast, 100% client-side WebP to PNG and JPG converter with privacy-first EXIF metadata stripping.",
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "featureList": [
+            "100% Client-Side In-Browser Conversion",
+            "Zero Server Uploads",
+            "Batch ZIP Download",
+            "EXIF Metadata Stripping Privacy Mode",
+            "Lossless PNG and Configurable JPG Quality"
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Is WebpSnap free and private?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, WebpSnap is 100% free and completely private. All conversions occur locally within your browser using HTML5 Canvas and Web Workers. Your images never leave your computer."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does WebpSnap convert WebP to PNG or JPG without uploading?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "WebpSnap uses the browser's native OffscreenCanvas and Web Worker APIs. It decodes the WebP file into memory, renders it onto an isolated canvas, and re-encodes it into PNG or JPG without sending a single byte over the internet."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is EXIF metadata stripping and why is it useful?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "EXIF data contains sensitive hidden information such as exact GPS location, capture timestamp, camera serial number, and device settings. WebpSnap's Privacy Mode rasterizes the pixel data cleanly, eliminating all tracking metadata."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I convert multiple WebP images at once?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, you can drag and drop dozens of files simultaneously. WebpSnap converts them concurrently and allows you to download them individually or bundled together in a single ZIP archive."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is there any file size limit?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "There are no arbitrary server file size caps. Because WebpSnap runs directly on your device hardware, performance depends solely on your computer's memory and processor."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <title>WebpSnap — Instant WebP to PNG/JPG Converter (100% Client-Side)</title>
   </head>
   <body class="bg-slate-950 text-slate-100 antialiased min-h-screen">
     <div id="root"></div>
