@@ -31,6 +31,7 @@ function addFilesRecursively(dir, zipFolder) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
 
   for (const entry of entries) {
+    if (entry.name === 'store-assets') continue;
     const fullPath = path.join(dir, entry.name);
 
     if (entry.isDirectory()) {
