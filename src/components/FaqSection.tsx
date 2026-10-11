@@ -28,6 +28,11 @@ const FAQ_ITEMS: FaqItem[] = [
       'Yes! You can drag and drop dozens of WebP files at the same time. ZapWebp converts them concurrently with automatic queuing, and provides a one-click ZIP download button so you can download all converted PNG or JPG images at once.',
   },
   {
+    question: 'Can I convert iPhone HEIC photos to JPG, PNG, or WebP?',
+    answer:
+      'Yes! ZapWebp natively supports Apple iPhone and iPad HEIC/HEIF photos. Through our in-browser WebAssembly decoder, your HEIC pictures are converted locally into standard JPG, PNG, WebP, or AVIF formats at original resolution without uploading your personal camera roll to any third-party cloud.',
+  },
+  {
     question: 'Are there any file size or conversion limits?',
     answer:
       'There are zero arbitrary file size limits or daily quotas. Because processing happens purely on your computer hardware rather than a shared server cluster, capacity is bounded only by your device’s available RAM and CPU power.',
