@@ -54,7 +54,7 @@ export const Footer: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="min-h-[44px] inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-950/30 border border-amber-500/20 text-amber-300 hover:text-amber-200 hover:bg-amber-900/40 hover:border-amber-500/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 font-medium"
-            aria-label="Support the developer on Buy Me a Coffee"
+            aria-label="Support the developer on Ko-fi"
           >
             <Coffee className="w-3.5 h-3.5 text-amber-400" aria-hidden="true" />
             <span>{SITE_CONFIG.donationLabel} ☕</span>

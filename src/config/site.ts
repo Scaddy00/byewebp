@@ -4,10 +4,9 @@ export const SITE_CONFIG = {
   url: 'https://zapwebp.pages.dev',
   githubUrl: 'https://github.com/Scaddy00/zapwebp',
   /**
-   * Tip Jar / Donation URL:
-   * Replace this URL with your personal handle once created:
-   * e.g. 'https://buymeacoffee.com/yourname' or 'https://ko-fi.com/yourname'
+   * Tip Jar / Donation URL (Ko-fi):
    */
-  donationUrl: 'https://buymeacoffee.com/',
-  donationLabel: 'Buy Me a Coffee',
+  donationUrl: 'https://ko-fi.com/scaddy00',
+  donationLabel: 'Support on Ko-fi',
 };
+
