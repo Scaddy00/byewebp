@@ -35,7 +35,7 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
         </div>
 
         <div
-          className="inline-flex rounded-xl bg-slate-950 p-1 border border-slate-800"
+          className="grid grid-cols-4 rounded-xl bg-slate-950 p-1 border border-slate-800 gap-1 sm:w-auto w-full"
           role="group"
           aria-label="Format selector"
         >
@@ -43,7 +43,7 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
             type="button"
             onClick={() => onFormatChange('png')}
             disabled={disabled}
-            className={`min-h-[44px] min-w-[72px] px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 disabled:opacity-50 disabled:cursor-not-allowed ${
+            className={`min-h-[44px] px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 disabled:opacity-50 disabled:cursor-not-allowed ${
               format === 'png'
                 ? 'bg-gradient-to-r from-fuchsia-600 to-rose-600 text-white shadow-md'
                 : 'text-slate-400 hover:text-white hover:bg-slate-900'
@@ -56,7 +56,7 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
             type="button"
             onClick={() => onFormatChange('jpeg')}
             disabled={disabled}
-            className={`min-h-[44px] min-w-[72px] px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 disabled:opacity-50 disabled:cursor-not-allowed ${
+            className={`min-h-[44px] px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 disabled:opacity-50 disabled:cursor-not-allowed ${
               format === 'jpeg'
                 ? 'bg-gradient-to-r from-fuchsia-600 to-rose-600 text-white shadow-md'
                 : 'text-slate-400 hover:text-white hover:bg-slate-900'
@@ -65,11 +65,37 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
           >
             JPG
           </button>
+          <button
+            type="button"
+            onClick={() => onFormatChange('webp')}
+            disabled={disabled}
+            className={`min-h-[44px] px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 disabled:opacity-50 disabled:cursor-not-allowed ${
+              format === 'webp'
+                ? 'bg-gradient-to-r from-fuchsia-600 to-rose-600 text-white shadow-md'
+                : 'text-slate-400 hover:text-white hover:bg-slate-900'
+            }`}
+            aria-pressed={format === 'webp'}
+          >
+            WebP
+          </button>
+          <button
+            type="button"
+            onClick={() => onFormatChange('avif')}
+            disabled={disabled}
+            className={`min-h-[44px] px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 disabled:opacity-50 disabled:cursor-not-allowed ${
+              format === 'avif'
+                ? 'bg-gradient-to-r from-fuchsia-600 to-rose-600 text-white shadow-md'
+                : 'text-slate-400 hover:text-white hover:bg-slate-900'
+            }`}
+            aria-pressed={format === 'avif'}
+          >
+            AVIF
+          </button>
         </div>
       </div>
 
-      {/* JPG Quality Slider */}
-      {format === 'jpeg' && (
+      {/* Quality Slider (for lossy formats: JPG, WebP, AVIF) */}
+      {format !== 'png' && (
         <div className="pt-3 border-t border-slate-800/80 flex flex-col gap-2">
           <div className="flex items-center justify-between">
             <label
@@ -77,7 +103,7 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
               className="text-xs font-medium text-slate-300 flex items-center gap-1.5 cursor-pointer"
             >
               <Sliders className="w-3.5 h-3.5 text-fuchsia-400" aria-hidden="true" />
-              JPG Quality
+              <span>{format.toUpperCase()} Compression Quality</span>
             </label>
             <span className="text-xs font-bold text-fuchsia-400 font-mono">
               {Math.round(quality * 100)}%

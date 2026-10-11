@@ -20,7 +20,7 @@ export const Header: React.FC = () => {
       </div>
 
       <p className="max-w-xl text-sm sm:text-base text-slate-300 leading-relaxed">
-        Convert <strong className="text-white font-semibold">.webp</strong> images to <strong className="text-white font-semibold">PNG</strong> or <strong className="text-white font-semibold">JPG</strong> in a snap, right inside your browser memory. No files ever leave your device.
+        Convert between <strong className="text-white font-semibold">WebP, PNG, JPG, and AVIF</strong> in a snap, right inside your browser memory. Ultra-fast, private, and zero files ever leave your device.
       </p>
     </header>
   );
