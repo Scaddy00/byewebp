@@ -1,5 +1,6 @@
 import React from 'react';
-import { Lock, Zap, FileX } from 'lucide-react';
+import { Lock, Zap, FileX, Coffee } from 'lucide-react';
+import { SITE_CONFIG } from '../config/site';
 
 const GithubIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
   <svg
@@ -46,17 +47,30 @@ export const Footer: React.FC = () => {
       </div>
 
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-xs pt-2">
-        <span>ZapWebp • 100% In-Browser Privacy Utility</span>
-        <a
-          href="https://github.com/Scaddy00/zapwebp"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-slate-400 hover:text-fuchsia-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 rounded-md py-1 px-2"
-          aria-label="View repository and star on GitHub"
-        >
-          <GithubIcon className="w-3.5 h-3.5" />
-          <span>Star on GitHub ⭐</span>
-        </a>
+        <span>{SITE_CONFIG.name} • 100% In-Browser Privacy Utility</span>
+        <div className="flex items-center gap-2">
+          <a
+            href={SITE_CONFIG.donationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="min-h-[44px] inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-950/30 border border-amber-500/20 text-amber-300 hover:text-amber-200 hover:bg-amber-900/40 hover:border-amber-500/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 font-medium"
+            aria-label="Support the developer on Buy Me a Coffee"
+          >
+            <Coffee className="w-3.5 h-3.5 text-amber-400" aria-hidden="true" />
+            <span>{SITE_CONFIG.donationLabel} ☕</span>
+          </a>
+
+          <a
+            href={SITE_CONFIG.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="min-h-[44px] inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-slate-400 hover:text-fuchsia-300 hover:bg-slate-900/60 border border-transparent hover:border-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400"
+            aria-label="View repository and star on GitHub"
+          >
+            <GithubIcon className="w-3.5 h-3.5" />
+            <span>Star on GitHub ⭐</span>
+          </a>
+        </div>
       </div>
     </footer>
   );
