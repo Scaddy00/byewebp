@@ -1,12 +1,14 @@
 import React from 'react';
 import type { ImageItem } from '../types/converter';
 import { ImageCard } from './ImageCard';
-import { DownloadCloud, Trash2 } from 'lucide-react';
+import { Archive, DownloadCloud, Trash2, Loader2 } from 'lucide-react';
 
 interface ImageQueueProps {
   items: ImageItem[];
+  isZipping?: boolean;
   onDownload: (item: ImageItem) => void;
   onDownloadAll: () => void;
+  onDownloadZip: () => void;
   onRemove: (id: string) => void;
   onRetry: (id: string) => void;
   onClearAll: () => void;
@@ -14,8 +16,10 @@ interface ImageQueueProps {
 
 export const ImageQueue: React.FC<ImageQueueProps> = ({
   items,
+  isZipping = false,
   onDownload,
   onDownloadAll,
+  onDownloadZip,
   onRemove,
   onRetry,
   onClearAll,
@@ -23,7 +27,6 @@ export const ImageQueue: React.FC<ImageQueueProps> = ({
   if (items.length === 0) return null;
 
   const completedCount = items.filter((item) => item.status === 'completed').length;
-  const isAnyCompleted = completedCount > 0;
 
   return (
     <section className="w-full max-w-xl mx-auto flex flex-col gap-4">
@@ -37,21 +40,44 @@ export const ImageQueue: React.FC<ImageQueueProps> = ({
         </div>
 
         <div className="flex items-center gap-2">
-          {isAnyCompleted && (
+          {/* Batch Download Action: ZIP if >= 2, Direct if 1 */}
+          {completedCount >= 2 && (
+            <button
+              type="button"
+              onClick={onDownloadZip}
+              disabled={isZipping}
+              className="min-h-[44px] px-4 py-2 rounded-xl bg-gradient-to-r from-fuchsia-600 to-rose-600 hover:from-fuchsia-500 hover:to-rose-500 text-white text-xs font-bold inline-flex items-center gap-2 shadow-md shadow-fuchsia-950/40 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isZipping ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
+                  <span>Creazione ZIP...</span>
+                </>
+              ) : (
+                <>
+                  <Archive className="w-4 h-4" aria-hidden="true" />
+                  <span>Scarica ZIP ({completedCount})</span>
+                </>
+              )}
+            </button>
+          )}
+
+          {completedCount === 1 && (
             <button
               type="button"
               onClick={onDownloadAll}
               className="min-h-[44px] px-4 py-2 rounded-xl bg-gradient-to-r from-fuchsia-600 to-rose-600 hover:from-fuchsia-500 hover:to-rose-500 text-white text-xs font-bold inline-flex items-center gap-2 shadow-md shadow-fuchsia-950/40 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 active:scale-95"
             >
               <DownloadCloud className="w-4 h-4" aria-hidden="true" />
-              <span>Scarica tutti ({completedCount})</span>
+              <span>Scarica (1)</span>
             </button>
           )}
 
           <button
             type="button"
             onClick={onClearAll}
-            className="min-h-[44px] px-3 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 text-xs font-medium inline-flex items-center gap-1.5 border border-slate-700/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+            disabled={isZipping}
+            className="min-h-[44px] px-3 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 text-xs font-medium inline-flex items-center gap-1.5 border border-slate-700/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Trash2 className="w-4 h-4 text-slate-400" aria-hidden="true" />
             <span>Pulisci</span>

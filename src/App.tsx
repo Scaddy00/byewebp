@@ -1,10 +1,11 @@
-import { useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useWebpConverter } from './hooks/useWebpConverter';
 import { Header } from './components/Header';
 import { FormatSelector } from './components/FormatSelector';
 import { DropZone } from './components/DropZone';
 import { ImageQueue } from './components/ImageQueue';
 import { Footer } from './components/Footer';
+import { downloadZipArchive } from './utils/zip';
 import type { ImageItem } from './types/converter';
 
 export function App() {
@@ -22,6 +23,8 @@ export function App() {
     retryItem,
     isProcessing,
   } = useWebpConverter();
+
+  const [isZipping, setIsZipping] = useState(false);
 
   const handleDownloadItem = useCallback((item: ImageItem) => {
     if (!item.convertedUrl) return;
@@ -48,6 +51,17 @@ export function App() {
     });
   }, [items, handleDownloadItem]);
 
+  const handleDownloadZip = useCallback(async () => {
+    setIsZipping(true);
+    try {
+      await downloadZipArchive(items);
+    } catch (error) {
+      console.error('Failed to generate ZIP archive:', error);
+    } finally {
+      setIsZipping(false);
+    }
+  }, [items]);
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-between px-4 sm:px-6">
       <main className="w-full max-w-2xl flex flex-col items-center gap-6 sm:gap-8 flex-1">
@@ -67,8 +81,10 @@ export function App() {
 
         <ImageQueue
           items={items}
+          isZipping={isZipping}
           onDownload={handleDownloadItem}
           onDownloadAll={handleDownloadAll}
+          onDownloadZip={handleDownloadZip}
           onRemove={removeFile}
           onRetry={retryItem}
           onClearAll={clearAll}
