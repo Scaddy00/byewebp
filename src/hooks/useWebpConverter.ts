@@ -119,11 +119,20 @@ export function useWebpConverter() {
 
       fileArray.forEach((file) => {
         // Accept WebP files primarily, or common images
-        const isWebp =
-          file.type === 'image/webp' ||
-          file.name.toLowerCase().endsWith('.webp');
+        const nameLower = file.name.toLowerCase();
+        const isSupportedExt =
+          nameLower.endsWith('.webp') ||
+          nameLower.endsWith('.heic') ||
+          nameLower.endsWith('.heif') ||
+          nameLower.endsWith('.png') ||
+          nameLower.endsWith('.jpg') ||
+          nameLower.endsWith('.jpeg') ||
+          nameLower.endsWith('.avif') ||
+          nameLower.endsWith('.gif') ||
+          nameLower.endsWith('.bmp') ||
+          nameLower.endsWith('.svg');
 
-        if (!isWebp && !file.type.startsWith('image/')) {
+        if (!isSupportedExt && !file.type.startsWith('image/')) {
           return;
         }
 

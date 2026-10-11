@@ -76,7 +76,7 @@ export const DropZone: React.FC<DropZoneProps> = ({ onFilesSelected, disabled = 
         ref={fileInputRef}
         type="file"
         multiple
-        accept="image/*,.webp,.png,.jpg,.jpeg,.avif,.gif,.bmp,.svg"
+        accept="image/*,.webp,.png,.jpg,.jpeg,.avif,.gif,.bmp,.svg,.heic,.heif,image/heic,image/heif"
         onChange={handleFileInputChange}
         disabled={disabled}
         className="sr-only"
@@ -103,7 +103,7 @@ export const DropZone: React.FC<DropZoneProps> = ({ onFilesSelected, disabled = 
           Drag & drop <span className="text-fuchsia-400">images</span> here or click to browse
         </p>
         <p className="text-xs sm:text-sm text-slate-400">
-          Supports WebP, PNG, JPG, AVIF, GIF, BMP • Single or batch upload • 100% private
+          Supports WebP, Apple HEIC, PNG, JPG, AVIF, GIF, BMP • Single or batch upload • 100% private
         </p>
       </div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ImageItem } from '../types/converter';
-import { Download, Loader2, AlertCircle, RefreshCw, Trash2, CheckCircle2 } from 'lucide-react';
+import { Download, Loader2, AlertCircle, RefreshCw, Trash2, CheckCircle2, Image as ImageIcon } from 'lucide-react';
 
 interface ImageCardProps {
   item: ImageItem;
@@ -28,16 +28,22 @@ export const ImageCard: React.FC<ImageCardProps> = ({
   const originalExt = item.file.name.split('.').pop()?.toLowerCase() || 'img';
   const originalSizeStr = formatBytes(item.file.size);
   const convertedSizeStr = item.convertedSize ? formatBytes(item.convertedSize) : null;
+  const isHeic = originalExt === 'heic' || originalExt === 'heif';
+  const displayUrl = item.convertedUrl || (!isHeic ? item.previewUrl : null);
 
   return (
     <div className="w-full bg-slate-900/90 border border-slate-800 rounded-2xl p-3 sm:p-4 flex items-center justify-between gap-3 shadow-lg transition-all hover:border-slate-700">
       {/* Thumbnail */}
       <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-950 border border-slate-800 shrink-0 flex items-center justify-center">
-        <img
-          src={item.previewUrl}
-          alt={`Preview of ${item.file.name}`}
-          className="w-full h-full object-cover"
-        />
+        {displayUrl ? (
+          <img
+            src={displayUrl}
+            alt={`Preview of ${item.file.name}`}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <ImageIcon className="w-6 h-6 text-fuchsia-400/80" aria-hidden="true" />
+        )}
         <span className="absolute bottom-1 right-1 px-1 py-0.2 rounded bg-black/75 text-[9px] font-mono text-slate-300 uppercase leading-none">
           {originalExt}
         </span>
