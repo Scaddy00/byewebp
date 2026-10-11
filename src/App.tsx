@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { FormatSelector } from './components/FormatSelector';
 import { DropZone } from './components/DropZone';
 import { ImageQueue } from './components/ImageQueue';
+import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { downloadZipArchive } from './utils/zip';
 import type { ImageItem } from './types/converter';
@@ -89,6 +90,8 @@ export function App() {
           onRetry={retryItem}
           onClearAll={clearAll}
         />
+
+        <FaqSection />
       </main>
 
       <Footer />
